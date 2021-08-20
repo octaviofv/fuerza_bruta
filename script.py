@@ -2,6 +2,17 @@
 import pandas as pd
 import numpy as np
 import random
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
+import time
+from bs4 import BeautifulSoup
+import requests
+import os
+
 
 # variables
 variables = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
@@ -36,3 +47,27 @@ for i in range(0, len(codigo), 9):
     else:
         pass
 print('codigos creados: ', len(codigo_usar))        
+
+# abrir navegador
+# ruta driver
+path_driver = "./chromedriver.exe"
+
+# opciones de driver
+option = Options()
+option.add_argument("--disable-infobars")
+option.add_argument("start-maximized")
+option.add_argument("--disable-extensions")
+
+# Pass the argument 1 to allow and 2 to block
+option.add_experimental_option("prefs", { 
+    "profile.default_content_setting_values.notifications": 2 
+})
+
+# definir driver
+print("abriendo navegador")
+driver = webdriver.Chrome(chrome_options=option, executable_path=path_driver)
+driver.set_window_size(1600, 1024)
+
+# definir web
+print("ingresando a sitio")
+driver.get("https://elbotindelays.cl/")
