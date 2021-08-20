@@ -1,2 +1,2 @@
 # fuerza_bruta
-crear un algoritmo que genere codigos de 10 caracteres y los inyecte en una web
+objetivo: crear un algoritmo que genere codigos aleatorios de 10 caracteres y que sean inyectados en sitio web de concurso
