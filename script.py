@@ -71,3 +71,40 @@ driver.set_window_size(1600, 1024)
 # definir web
 print("ingresando a sitio")
 driver.get("https://elbotindelays.cl/")
+
+# boton inicio sesion
+print("click boton inicio sesion")
+boton_inicio_sesion = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a[class='btn btn--red']"))).click()
+
+# datos de usuario
+print("ingresando datos de usuario")
+input_email = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='email']")))
+input_email.clear()
+input_email.send_keys('email@gmail.com')
+input_rut = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='rut']")))
+input_rut.clear()
+input_rut.send_keys('111111111')
+boton_ingresar = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[class='btn btn--yellow']"))).click()
+
+# cambio de sitio a ingresar codigo
+print("cambiando de pagina")
+driver.get("https://elbotindelays.cl/codigo")
+
+# ciclo actualizar pagina e inyectar codigo
+for i in range(2, 100):
+    driver.get("https://elbotindelays.cl/codigo")
+
+    # ingresar codigo
+    input_codigo = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='code']")))
+    input_codigo.clear()
+    print('intento: ', i, 'usando el codigo: ', codigo_usar[i])
+    input_codigo.send_keys(codigo_usar[i])
+
+    #click en ingresar codigo
+    boton_ingresar_codigo = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[class='square square--black']"))).click()
+
+    time.sleep(2)
+    
+# cerrar driver
+print("cerrando navegador")
+driver.quit()
