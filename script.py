@@ -91,7 +91,8 @@ print("cambiando de pagina")
 driver.get("https://elbotindelays.cl/codigo")
 
 # ciclo actualizar pagina e inyectar codigo
-for i in range(2, 100):
+# probando 100 veces
+for i in range(0, 100):
     driver.get("https://elbotindelays.cl/codigo")
 
     # ingresar codigo
